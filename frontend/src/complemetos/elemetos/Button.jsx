@@ -1,4 +1,5 @@
-const Button = (onClick, contentButton, extraClass, labelContent) => {
+/* eslint-disable react/prop-types */
+const Button = ({onClick, contentButton, extraClass, labelContent}) => {
   return (
     <div className="button-container-elm">
       <label form="button-elm-id">
@@ -8,7 +9,7 @@ const Button = (onClick, contentButton, extraClass, labelContent) => {
         </button>
       </label>
     </div>
-  );
+  )
 };
 
-export default Button;
+export default Button

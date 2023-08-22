@@ -1,5 +1,5 @@
-import Input from "./elemetos/input";
-import Button from "./elemetos/Button";
+import Input from "./elemetos/Input";
+import Button from "./elemetos/button";
 
 const Register = () => {
   return (

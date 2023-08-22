@@ -1,3 +1,4 @@
+import './styles/interfazLogin.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import FormSumbit from "./complemetos/FormSumbit";
 import Home from "./complemetos/Home";

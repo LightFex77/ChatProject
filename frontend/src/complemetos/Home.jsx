@@ -8,8 +8,8 @@ const Home = () => {
                 <p>Registrate o Incia sesion para empezar a chatear</p>
             </section>
             <section className="account-section">
-                <Button contentButton="Iniciar Sesion"/>
-                <Button contentButton="Registrarse"/>
+                <Button contentButton="Iniciar Sesion" extraClass="btns-home"/>
+                <Button contentButton="Registrarse" extraClass="btns-home"/>
             </section>
         </div>
     )

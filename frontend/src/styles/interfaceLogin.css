@@ -49,8 +49,30 @@
     letter-spacing: 2px; 
     font-size: 2rem;
 }
-
-.register-account{
-    
+.register-info{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1.5rem;
+    min-width: 40%;
 }
-
+.title-register-s{
+    font-size: 2rem;
+}
+.input-container-elm label{
+    display: flex;
+    column-gap: 20px;
+    flex-direction: column;
+}
+.input-elm{
+    background-color: #D0D2D3;
+    border: 0;
+    padding: 10px;
+    flex: 1;
+}
+.button-container-elm label{
+    display: flex;
+}
+.button-elm{
+    flex: 1;
+}

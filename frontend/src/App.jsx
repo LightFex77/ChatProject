@@ -1,10 +1,13 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import FormSumbit from "./complemetos/FormSumbit";
 
 function App() {
   return (
-    <div className="room-container">
-      <FormSumbit />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/chat-room" element={<div className="room-container"><FormSumbit /></div>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

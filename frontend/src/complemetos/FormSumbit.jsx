@@ -14,7 +14,7 @@ const FormSubmit = () => {
 
     // Obtener el ID de socket asignado por el servidor
     socket.on("connect", () => {
-      setUserId(socket.id.slice(5));
+      setUserId(socket.id);
     });
 
     // Escuchar mensajes del servidor

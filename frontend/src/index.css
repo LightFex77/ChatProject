@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  font-family: "VT323", monospace;
+}
+body{
+  background: url("./assets/minecraft_dirt.png");
+  background-color: black;
+}
+.room-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.chat-container{
+  background-image: linear-gradient(#ECEDED, #EBEEF4);
+  max-height: 50%;
+  min-height: 95%;
+  min-width: 40%;
+  max-width: 80%;
+
+  overflow-y: auto; 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 0 10px;
+}
+.messages{
+  flex: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 10px;
+}
+.sumbit-messages{
+  height: auto;
+}
+.input-button-messages{
+  display: flex;
+}
+.input-button-messages input{
+  flex: 1;
+  background-color: #D0D2D3;
+  border: 0;
+}
+.input-button-messages button{
+  padding: 15px;
+  background-color: #4F8136;
+  border: 0;
+  border-bottom: 4px #3D5033 solid;
+  color: #FFFFFF;
+}
+.list-messages{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.li-message-left{
+  list-style: none;
+  margin-left: 5rem;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 5px;
+}
+.li-message-right{
+  list-style: none;
+  margin-right: 5rem;
+  display: flex;
+  gap: 5px;
+}
+.span-message{
+  display: flex;
+  background-color: #D0D2D3;
+  flex: 1;
+  padding: 10px;
+}
+.initial-name{
+  background-color: red;
+  font-size: 2rem;
+  padding: 0 10px 0 10px;
+}

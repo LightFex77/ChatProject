@@ -1,0 +1,9 @@
+.interface-container-g{
+    
+}
+.home-container{
+    background-color: #ffff;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}

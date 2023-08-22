@@ -1,3 +1,5 @@
+import "../styles/interfaceModal.css"
+
 const ModalLogin = () => {
     return (
         <div className="modal-class">

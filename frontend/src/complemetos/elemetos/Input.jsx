@@ -1,4 +1,5 @@
-const Input = (labelContent, extraClass, onChange, placeholder, value) => {
+/* eslint-disable react/prop-types */
+const Input = ({labelContent, extraClass, onChange, placeholder, value, typeText}) => {
   return (
     <div className="input-container-elm">
       <label form="input-elm-id">
@@ -9,6 +10,7 @@ const Input = (labelContent, extraClass, onChange, placeholder, value) => {
           onChange={onChange}
           placeholder={placeholder}
           value={value}
+          type={typeText}
         ></input>
       </label>
     </div>

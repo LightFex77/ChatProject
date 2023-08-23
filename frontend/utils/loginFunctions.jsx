@@ -40,8 +40,10 @@ try{
     },
     body: JSON.stringify(requestBody)
   });
-
+  const result = await response.json();
   if(response.ok){
+      localStorage.setItem("usuario", JSON.stringify(result));
+    
     navigate("/chat-room")
   }
 }catch(error){

@@ -22,7 +22,8 @@ const insertUsersService = async (username, password, email, creationDate) => {
 
     const result = await connection.query(query, values);
 
-    return result.rows
+    const authenticate = authenticateUserService(username, password)
+    return authenticate;
 }
 
 const authenticateUserService = async (user, password) => {

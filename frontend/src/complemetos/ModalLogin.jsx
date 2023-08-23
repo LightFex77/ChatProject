@@ -1,5 +1,5 @@
 import onClickModal from "../../utils/onClickModal";
-import {loginFunctions} from "../../utils/loginFunctions";
+import { loginFunctions } from "../../utils/loginFunctions";
 import "../styles/interfaceModal.css";
 import Input from "./elemetos/Input";
 import Button from "./elemetos/button";
@@ -26,14 +26,23 @@ const ModalLogin = ({ styleModal, showM, setShowM }) => {
           <h1>Iniciar Sesion</h1>
         </section>
         <section className="register-info">
-          <Input placeholder="Username/Email" labelContent="Usuario" onChange={(e) => setUser(e.target.value)}/>
+          <Input
+            placeholder="Username/Email"
+            labelContent="Usuario"
+            onChange={(e) => setUser(e.target.value)}
+            name="email"
+          />
           <Input
             placeholder="Contraseña"
             labelContent="Contraseña"
             typeText="password"
-            onChange={(e)=> setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
+            name="password"
           />
-          <Button contentButton="Ingresar" onClick={() => loginFunctions(user, password, navigate)}/>
+          <Button
+            contentButton="Ingresar"
+            onClick={() => loginFunctions(user, password, navigate)}
+          />
         </section>
       </div>
     </div>

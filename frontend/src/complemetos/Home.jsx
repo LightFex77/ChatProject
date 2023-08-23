@@ -4,8 +4,10 @@ import onClickModal from "../../utils/onClickModal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import onClickRedirect from "../../utils/onClickRedirect";
+import {useRedirectToChat} from "../hooks/useRedirect";
 
 const Home = () => {
+  useRedirectToChat();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   return (

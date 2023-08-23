@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
+import { useRedirectToHome} from "../hooks/useRedirect";
 
 const FormSubmit = () => {
+ useRedirectToHome();
   const [socket, setSocket] = useState(null);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);

@@ -3,8 +3,10 @@ import Input from "./elemetos/Input";
 import Button from "./elemetos/button";
 import { register } from "../../utils/loginFunctions";
 import { useNavigate } from "react-router-dom";
+import { useRedirectToChat} from "../hooks/useRedirect";
 
 const Register = () => {
+  useRedirectToChat();
   const navigate = useNavigate();
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);

@@ -5,7 +5,7 @@ export const useRedirectToHome = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const userSaved = localStorage.getItem("user");
+    const userSaved = localStorage.getItem("userMine");
     !userSaved && navigate("/");
   }, []);
 };
@@ -14,7 +14,7 @@ export const useRedirectToChat = () => {
     const navigate = useNavigate();
   
     useEffect(() => {
-      const userSaved = localStorage.getItem("user");
-      !userSaved && navigate("/chat-room");
+      const userSaved = localStorage.getItem("userMine");
+      userSaved && navigate("/chat-room");
     }, []);
   };

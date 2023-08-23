@@ -53,7 +53,7 @@
 .register-info{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     font-size: 1.5rem;
     min-width: 40%;
 }

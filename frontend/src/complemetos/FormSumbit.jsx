@@ -16,7 +16,9 @@ const FormSubmit = () => {
 
     // Obtener el ID de socket asignado por el servidor
     socket.on("connect", () => {
-      setUserId(socket.id);
+      const userId = localStorage.getItem("userMine");
+      const userObj= JSON.parse(userId);
+      setUserId(userObj.user.username);
     });
 
     // Escuchar mensajes del servidor
@@ -51,7 +53,7 @@ const FormSubmit = () => {
                 msg.userId === userId ? "right" : "left"
               }`}
             >
-              <span className="initial-name">{msg.userId.charAt(0)}</span>
+              <span className="initial-name" style={msg.userId === userId ?{background: "#4F8136"}: {background: "#48494D"}}>{msg.userId.charAt(0)}</span>
               <span className="span-message">{msg.body}</span>
             </li>
           ))}

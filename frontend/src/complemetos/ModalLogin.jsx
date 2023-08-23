@@ -3,14 +3,21 @@ import { loginFunctions } from "../../utils/loginFunctions";
 import "../styles/interfaceModal.css";
 import Input from "./elemetos/Input";
 import Button from "./elemetos/button";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
 // eslint-disable-next-line react/prop-types
 const ModalLogin = ({ styleModal, showM, setShowM }) => {
+  const formik = useFormik({
+    initialValues: {
+      user: "",
+      password: ""
+    },
+    onSubmit: (formData) => {
+      console.log(formData);
+      loginFunctions(formData.user, formData.password, navigate)
+    }
+  });
   const navigate = useNavigate();
-
-  const [user, setUser] = useState(null);
-  const [password, setPassword] = useState(null);
 
   return (
     <div className="modal-class" style={styleModal}>
@@ -25,25 +32,24 @@ const ModalLogin = ({ styleModal, showM, setShowM }) => {
         <section className="login-section-modal">
           <h1>Iniciar Sesion</h1>
         </section>
-        <section className="register-info">
+        <form className="register-info" onSubmit={formik.handleSubmit}>
           <Input
             placeholder="Username/Email"
             labelContent="Usuario"
-            onChange={(e) => setUser(e.target.value)}
-            name="email"
+            onChange={(formik.handleChange)}
+            name="user"
           />
           <Input
             placeholder="Contraseña"
             labelContent="Contraseña"
             typeText="password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={formik.handleChange}
             name="password"
           />
           <Button
             contentButton="Ingresar"
-            onClick={() => loginFunctions(user, password, navigate)}
           />
-        </section>
+        </form>
       </div>
     </div>
   );

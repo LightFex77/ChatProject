@@ -11,16 +11,16 @@ const ModalLogin = ({ styleModal, showM, setShowM }) => {
   const formik = useFormik({
     initialValues: {
       user: "",
-      password: ""
+      password: "",
     },
     validationSchema: Yup.object({
-      user: Yup.string().required(),
-      password: Yup.string().required()
+      user: Yup.string().required("username o email requerida"),
+      password: Yup.string().required("contraseña requerida")
     }),
     onSubmit: (formData) => {
       console.log(formData);
-      loginFunctions(formData.user, formData.password, navigate)
-    }
+      loginFunctions(formData.user, formData.password, navigate);
+    },
   });
   const navigate = useNavigate();
 
@@ -41,8 +41,9 @@ const ModalLogin = ({ styleModal, showM, setShowM }) => {
           <Input
             placeholder="Username/Email"
             labelContent="Usuario"
-            onChange={(formik.handleChange)}
+            onChange={formik.handleChange}
             name="user"
+            error={formik.errors.user}
           />
           <Input
             placeholder="Contraseña"
@@ -50,10 +51,9 @@ const ModalLogin = ({ styleModal, showM, setShowM }) => {
             typeText="password"
             onChange={formik.handleChange}
             name="password"
+            error={formik.errors.password}
           />
-          <Button
-            contentButton="Ingresar"
-          />
+          <Button contentButton="Ingresar" />
         </form>
       </div>
     </div>

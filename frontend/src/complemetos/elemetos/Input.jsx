@@ -13,7 +13,7 @@ const Input = ({labelContent, extraClass, onChange, placeholder, value, typeText
           type={typeText}
           name={name}
         ></input>
-      <span className="error-form-data">{error}</span>;
+      <span className="error-form-data">{error}</span>
       </label>
     </div>
   );

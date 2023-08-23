@@ -1,5 +1,5 @@
 const {getUsersService, insertUsersService, authenticateUserService} = require("../services/login.service");
-
+const jwt = require("jsonwebtoken")   
 const getUsersController = async (req, res) => {
     const users = await getUsersService();
 
@@ -13,9 +13,21 @@ const insertUsersControllers = async (req, res) => {
 
     const newUser = await insertUsersService(username, password, email, creationDate);
 
-    res.status(200).json({
-        usuarios: newUser
-    })
+    if (newUser) {
+        // El usuario se registró con éxito
+        const token = jwt.sign(
+          {
+            userId: newUser.id,
+            userName: newUser.username,
+            userEmail: newUser.email
+          },
+          "admin123"
+        );
+  
+        res.status(200).json({ message: 'Registro exitoso', user: newUser, token });
+      } else {
+        res.status(500).json({ message: 'No se pudo completar el registro' });
+      }
 }
 
 const authenticateUserController = async (req, res) => {
@@ -26,7 +38,15 @@ const authenticateUserController = async (req, res) => {
 
         if (authenticatedUser) {
             // El usuario se autenticó con éxito
-            res.status(200).json({ message: 'Autenticación exitosa', user: authenticatedUser });
+            res.status(200).json({ user: authenticatedUser, token });
+            const token = jwt.sign(
+                {
+                    userId: authenticatedUser.id,
+                    userName: authenticatedUser.username,
+                    userEmail: authenticatedUser.email
+                },
+                "admin123",
+            )
         } else {
             // Usuario no autenticado (credenciales incorrectas)
             res.status(401).json({ message: 'Credenciales incorrectas' });

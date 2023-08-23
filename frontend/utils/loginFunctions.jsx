@@ -12,8 +12,9 @@ export const loginFunctions = async (username, pass, navigate) => {
         },
         body: JSON.stringify(requestBody), // Convierte el objeto en JSON
       });
-  
+  const result = await response.json();
       if (response.ok) {
+        localStorage.setItem("usuario", JSON.stringify(result));
         navigate("chat-room");
       }
   

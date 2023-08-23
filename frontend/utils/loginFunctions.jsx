@@ -1,4 +1,4 @@
-export const loginFunctions = async (username, pass, navigate) => {
+export const loginFunctions = async (username, pass, navigate, setErrorInvalidDataUser, setErrorInvalidDataPassword) => {
     try {
       const requestBody = {
         user: username,
@@ -16,6 +16,9 @@ export const loginFunctions = async (username, pass, navigate) => {
       if (response.ok) {
         localStorage.setItem("userMine", JSON.stringify(result));
         navigate("chat-room");
+      }else{
+        setErrorInvalidDataUser("Usuario invalido");
+        setErrorInvalidDataPassword("Contraseña invalida");
       }
   
       // Procesar la respuesta aquí, por ejemplo:

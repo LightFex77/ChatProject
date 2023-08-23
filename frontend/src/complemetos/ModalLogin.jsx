@@ -5,6 +5,7 @@ import Input from "./elemetos/Input";
 import Button from "./elemetos/button";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import { useState } from "react";
 import * as Yup from "yup";
 // eslint-disable-next-line react/prop-types
 const ModalLogin = ({ styleModal, showM, setShowM }) => {
@@ -15,14 +16,38 @@ const ModalLogin = ({ styleModal, showM, setShowM }) => {
     },
     validationSchema: Yup.object({
       user: Yup.string().required("username o email requerida"),
-      password: Yup.string().required("contraseña requerida")
+      password: Yup.string().required("contraseña requerida"),
     }),
     onSubmit: (formData) => {
       console.log(formData);
-      loginFunctions(formData.user, formData.password, navigate);
+      loginFunctions(
+        formData.user,
+        formData.password,
+        navigate,
+        setErrorInvalidDataUser,
+        setErrorInvalidDataPassword
+      );
     },
   });
+
+  const handleInputChange = (e) => {
+    // Obtén el nombre del campo y el nuevo valor
+    const { name, value } = e.target;
+
+    // Actualiza el estado correspondiente con una cadena vacía
+    if (name === "user") {
+      setErrorInvalidDataUser("");
+    } else if (name === "password") {
+      setErrorInvalidDataPassword("");
+    }
+
+    // Actualiza los valores de formik
+    formik.setFieldValue(name, value);
+  };
+
   const navigate = useNavigate();
+  const [errorInvalidDataUser, setErrorInvalidDataUser] = useState("");
+  const [errorInvalidDataPassword, setErrorInvalidDataPassword] = useState("");
 
   return (
     <div className="modal-class" style={styleModal}>
@@ -41,17 +66,17 @@ const ModalLogin = ({ styleModal, showM, setShowM }) => {
           <Input
             placeholder="Username/Email"
             labelContent="Usuario"
-            onChange={formik.handleChange}
+            onChange={handleInputChange}
             name="user"
-            error={formik.errors.user}
+            error={formik.errors.user ?? errorInvalidDataUser}
           />
           <Input
             placeholder="Contraseña"
             labelContent="Contraseña"
             typeText="password"
-            onChange={formik.handleChange}
+            onChange={handleInputChange}
             name="password"
-            error={formik.errors.password}
+            error={formik.errors.password ?? errorInvalidDataPassword}
           />
           <Button contentButton="Ingresar" />
         </form>

@@ -27,7 +27,7 @@ const insertUsersService = async (username, password, email, creationDate) => {
 
 const authenticateUserService = async (user, password) => {
     const query = `
-        SELECT *
+        SELECT id, username, email, "creationDate"
         FROM public.login
         WHERE (username = $1 OR email = $1) AND password = $2;
     `;

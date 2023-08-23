@@ -24,7 +24,7 @@ const insertUsersControllers = async (req, res) => {
           "admin123"
         );
   
-        res.status(200).json({ message: 'Registro exitoso', user: newUser, token });
+        res.status(200).json({user: newUser, token });
       } else {
         res.status(500).json({ message: 'No se pudo completar el registro' });
       }
@@ -38,7 +38,6 @@ const authenticateUserController = async (req, res) => {
 
         if (authenticatedUser) {
             // El usuario se autenticó con éxito
-            res.status(200).json({ user: authenticatedUser, token });
             const token = jwt.sign(
                 {
                     userId: authenticatedUser.id,
@@ -47,6 +46,7 @@ const authenticateUserController = async (req, res) => {
                 },
                 "admin123",
             )
+            return res.status(200).json({ user: authenticatedUser, token });
         } else {
             // Usuario no autenticado (credenciales incorrectas)
             res.status(401).json({ message: 'Credenciales incorrectas' });

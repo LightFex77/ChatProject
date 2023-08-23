@@ -5,6 +5,7 @@ import Input from "./elemetos/Input";
 import Button from "./elemetos/button";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 // eslint-disable-next-line react/prop-types
 const ModalLogin = ({ styleModal, showM, setShowM }) => {
   const formik = useFormik({
@@ -12,6 +13,10 @@ const ModalLogin = ({ styleModal, showM, setShowM }) => {
       user: "",
       password: ""
     },
+    validationSchema: Yup.object({
+      user: Yup.string().required(),
+      password: Yup.string().required()
+    }),
     onSubmit: (formData) => {
       console.log(formData);
       loginFunctions(formData.user, formData.password, navigate)

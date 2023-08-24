@@ -1,31 +1,40 @@
-import onClickModal from "../../utils/onClickModal";
-import { loginFunctions } from "../../utils/loginFunctions";
-import "../styles/interfaceModal.css";
-import Input from "./elemetos/Input";
-import Button from "./elemetos/button";
-import { useNavigate } from "react-router-dom";
-import { useFormik } from "formik";
-import { useState } from "react";
-import * as Yup from "yup";
+import onClickModal from '../../utils/onClickModal';
+import { loginFunctions } from '../../utils/loginFunctions';
+import '../styles/interfaceModal.css';
+import Input from './elemetos/Input';
+import Button from './elemetos/button';
+import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
+import { useState } from 'react';
+import * as Yup from 'yup';
 // eslint-disable-next-line react/prop-types
 const ModalLogin = ({ styleModal, showM, setShowM }) => {
+  const [errorLogin, setErrorLogin] = useState('');
+
   const formik = useFormik({
     initialValues: {
-      user: "",
-      password: "",
+      user: '',
+      password: '',
     },
     validationSchema: Yup.object({
-      user: Yup.string().required("username o email requerida"),
-      password: Yup.string().required("contraseña requerida"),
+      user: Yup.string().required('username o email requerida'),
+      password: Yup.string().required('contraseña requerida'),
     }),
-    onSubmit: (formData) => {
-      loginFunctions(
+    onSubmit: async (formData) => {
+      setErrorLogin('');
+
+      const loginData = await loginFunctions(
         formData.user,
         formData.password,
-        navigate,
-        setErrorInvalidDataUser,
-        setErrorInvalidDataPassword
+        navigate
       );
+
+      if (loginData) {
+        localStorage.setItem('userMine', JSON.stringify(loginData));
+        navigate('chat-room');
+      } else {
+        setErrorLogin('Usuario o contraseña incorrecta');
+      }
     },
   });
 
@@ -34,19 +43,19 @@ const ModalLogin = ({ styleModal, showM, setShowM }) => {
     const { name, value } = e.target;
 
     // Actualiza el estado correspondiente con una cadena vacía
-    if (name === "user") {
-      setErrorInvalidDataUser("");
-    } else if (name === "password") {
-      setErrorInvalidDataPassword("");
-    }
+    // if (name === "user") {
+    //   setErrorInvalidDataUser("");
+    // } else if (name === "password") {
+    //   setErrorInvalidDataPassword("");
+    // }
 
     // Actualiza los valores de formik
     formik.setFieldValue(name, value);
   };
 
   const navigate = useNavigate();
-  const [errorInvalidDataUser, setErrorInvalidDataUser] = useState("");
-  const [errorInvalidDataPassword, setErrorInvalidDataPassword] = useState("");
+  // const [errorInvalidDataUser, setErrorInvalidDataUser] = useState("");
+  // const [errorInvalidDataPassword, setErrorInvalidDataPassword] = useState("");
 
   return (
     <div className="modal-class" style={styleModal}>
@@ -65,9 +74,10 @@ const ModalLogin = ({ styleModal, showM, setShowM }) => {
           <Input
             placeholder="Username/Email"
             labelContent="Usuario"
-            onChange={handleInputChange}
+            onChange={formik.handleChange}
             name="user"
-            error={formik.errors.user ?? errorInvalidDataUser}
+            // error={formik.errors.user ?? errorInvalidDataUser}
+            error={formik.errors.user}
           />
           <Input
             placeholder="Contraseña"
@@ -75,8 +85,14 @@ const ModalLogin = ({ styleModal, showM, setShowM }) => {
             typeText="password"
             onChange={handleInputChange}
             name="password"
-            error={formik.errors.password ?? errorInvalidDataPassword}
+            // error={formik.errors.password ?? errorInvalidDataPassword}
+            error={formik.errors.password}
           />
+          <span
+            className="error-form-data"
+            style={{ color: 'red', padding: '0', height: '10px' }}>
+            {errorLogin}
+          </span>
           <Button contentButton="Ingresar" />
         </form>
       </div>

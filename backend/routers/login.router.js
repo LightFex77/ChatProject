@@ -1,9 +1,10 @@
-const {getUsersController, insertUsersControllers, authenticateUserController} = require('../controllers/login.controller');
+const { getUsersController, insertUsersControllers, authenticateUserController } = require('../controllers/login.controller');
 
-const {Router} = require('express');
+const { Router } = require('express');
 
 const router = Router();
 
+// Es un endpoint de prueba
 router.get("/login", getUsersController);
 
 router.post("/login", insertUsersControllers);

@@ -3,6 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const { Server } = require("socket.io");
 const loginRouter = require("./routers/login.router");
+const { AppDataSource } = require("./utils/connection");
+
 
 const app = express();
 app.use(express.json());
@@ -33,6 +35,8 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3000, () => {
+server.listen(3000, async () => {
   console.log("Servidor escuchando en el puerto 3000");
+  await AppDataSource.initialize();
+  console.log("Conectado a la base de datos");
 });

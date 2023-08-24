@@ -1,29 +1,36 @@
-import Input from "./elemetos/Input";
-import Button from "./elemetos/button";
-import { register } from "../../utils/loginFunctions";
-import { useNavigate } from "react-router-dom";
-import { useRedirectToChat } from "../hooks/useRedirect";
-import { useFormik } from "formik";
-import * as Yup from "yup"
+import Input from './elemetos/Input';
+import Button from './elemetos/button';
+import { register } from '../../utils/loginFunctions';
+import { useNavigate } from 'react-router-dom';
+import { useRedirectToChat } from '../hooks/useRedirect';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 const Register = () => {
   useRedirectToChat();
-  const formik = useFormik({
-    initialValues: {
-      username: "",
-      password: "",
-      email: "",
-    },validationSchema: Yup.object({
-      username: Yup.string().required("Usuario requerido"),
-      password: Yup.string().required("Contraseña requerida"),
-      email: Yup.string().email("email invalido").required("Email requerido")
-    }),
-    onSubmit: (formData) => {
-      register(formData.username, formData.password, formData.email, navigate);
-    },
-  });
 
   const navigate = useNavigate();
+
+  const formik = useFormik({
+    initialValues: {
+      username: '',
+      password: '',
+      email: '',
+    },
+    validationSchema: Yup.object({
+      username: Yup.string().required('Usuario requerido'),
+      password: Yup.string().required('Contraseña requerida'),
+      email: Yup.string().email('Email invalido').required('Email requerido'),
+    }),
+    onSubmit: async (formData) => {
+      try {
+        await register(formData.username, formData.password, formData.email);
+        navigate('/chat-room');
+      } catch (error) {
+        alert('Error al registrar');
+      }
+    },
+  });
   return (
     <div className="home-container" onSubmit={formik.handleSubmit}>
       <section className="title-register-s">
@@ -52,9 +59,7 @@ const Register = () => {
           name="email"
           error={formik.errors.email}
         />
-        <Button
-          contentButton="Registrarse"
-        />
+        <Button contentButton="Registrarse" />
       </form>
     </div>
   );

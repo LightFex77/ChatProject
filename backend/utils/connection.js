@@ -1,11 +1,22 @@
-const pg = require('pg')
+const Login = require("../services/entities/login.entity");
+const { DataSource } = require("typeorm");
 
-const connection = new pg.Pool({
-    user: 'postgres',
-    password: 'admin123',
-    database: 'chatServer',
+const AppDataSource = new DataSource({
+    type: "postgres",
     host: 'localhost',
-    port: '5432'
-});
+    port: '5432',
+    username: "postgres",
+    password: "admin123",
+    database: "chatServer",
+    entities: [Login],
+    synchronize: true,
+    logging: false,
+})
 
-module.exports = connection;
+const loginRepository = AppDataSource.getRepository("Login")
+
+module.exports = {
+    AppDataSource,
+    loginRepository,
+}
+

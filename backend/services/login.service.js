@@ -1,43 +1,36 @@
-const connection = require('../utils/connection');
+const { loginRepository } = require('../utils/connection');
 
 const getUsersService = async () => {
-    const query = 
-    `
-    SELECT username, password, email, "creationDate"
-	FROM public.login;
-    `
-    const result = await connection.query(query);
+    const result = await loginRepository.find();
 
     return result.rows;
 }
 
 const insertUsersService = async (username, password, email, creationDate) => {
-    const query = 
-    `
-    INSERT INTO public.login(
-        username, password, email, "creationDate")
-        VALUES ($1, $2, $3, $4);
-    `;
-    const values = [username, password, email, creationDate];
+    const result = await loginRepository.save({
+        username,
+        email,
+        password,
+        createdAt: creationDate,
+    })
 
-    const result = await connection.query(query, values);
+    console.log({ result })
 
     const authenticate = authenticateUserService(username, password)
     return authenticate;
 }
 
 const authenticateUserService = async (user, password) => {
-    const query = `
-        SELECT id, username, email, "creationDate"
-        FROM public.login
-        WHERE (username = $1 OR email = $1) AND password = $2;
-    `;
 
-    const values = [user, password];
+    const result = await loginRepository.findOne({
+        where: {
+            username: user,
+            password: password,
+        }
+    })
 
-    const result = await connection.query(query, values);
 
-    return result.rows[0]; // Devuelve el usuario autenticado o null si no se encuentra
+    return result
 }
 
 module.exports = {

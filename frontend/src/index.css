@@ -1,21 +1,20 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Montserrat", sans-serif;
-  font-family: "VT323", monospace;
+  font-family: 'VT323', monospace;
 }
-body{
-  background: url("./assets/minecraft_dirt.png");
+body {
+  background: url('./assets/minecraft_dirt.png');
   background-color: black;
 }
-.room-container{
+.room-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
-.chat-container{
-  background-image: linear-gradient(#ECEDED, #EBEEF4);
+.chat-container {
+  background-image: linear-gradient(#eceded, #ebeef4);
   max-height: 50%;
   min-height: 95%;
   min-width: 40%;
@@ -26,59 +25,88 @@ body{
   gap: 10px;
   box-shadow: 0 0 10px;
 }
-.messages{
-  overflow-y: auto; 
+.messages {
+  overflow-y: auto;
   flex: 1;
   display: flex;
   flex-direction: column-reverse;
   padding: 10px;
   position: relative;
 }
-.sumbit-messages{
+.sumbit-messages {
   height: auto;
 }
 .input-button-messages {
   display: flex;
 }
-.input-button-messages input{
+.input-button-messages input {
   flex: 1;
-  background-color: #D0D2D3;
+  background-color: #d0d2d3;
   border: 0;
   padding: 5px;
 }
-.input-button-messages button{
+.input-button-messages button {
   padding: 15px;
-  background-color: #4F8136;
+  background-color: #4f8136;
   border: 0;
-  border-bottom: 4px #3D5033 solid;
-  color: #FFFFFF;
+  border-bottom: 4px #3d5033 solid;
+  color: #ffffff;
 }
-.list-messages{
+.list-messages {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-.li-message-left{
+.li-message-left {
   list-style: none;
   margin-left: 5rem;
   display: flex;
   flex-direction: row-reverse;
   gap: 5px;
+  position: relative;
 }
-.li-message-right{
+.li-message-right {
   list-style: none;
   margin-right: 5rem;
   display: flex;
   gap: 5px;
+  position: relative;
 }
-.span-message{
-  display: flex;
-  background-color: #D0D2D3;
+
+.li-message-contenido {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: #d0d2d3;
   padding: 10px;
 }
-.initial-name{
+
+.span-message {
+}
+
+.initial-name {
   color: #ffff;
   font-size: 2rem;
   padding: 0 10px 0 10px;
+}
+
+.like-message-button {
+  height: 1rem;
+  border-radius: 0;
+  border: none;
+  padding: 2px;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.likes-count {
+  font-size: 0.8rem;
+}
+
+.like-message-button svg {
+  width: 0.8rem;
+  margin-right: 0.2rem;
 }

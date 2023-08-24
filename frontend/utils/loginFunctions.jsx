@@ -45,9 +45,8 @@ try{
   });
   const result = await response.json();
   if(response.ok){
-      localStorage.setItem("usuario", JSON.stringify(result));
-    
-    navigate("/chat-room")
+      localStorage.setItem("userMine", JSON.stringify(result));
+      navigate("/chat-room")
   }
 }catch(error){
   console.error("Error:", error)

@@ -19,7 +19,6 @@ const ModalLogin = ({ styleModal, showM, setShowM }) => {
       password: Yup.string().required("contraseña requerida"),
     }),
     onSubmit: (formData) => {
-      console.log(formData);
       loginFunctions(
         formData.user,
         formData.password,

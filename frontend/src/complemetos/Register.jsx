@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Input from "./elemetos/Input";
 import Button from "./elemetos/button";
 import { register } from "../../utils/loginFunctions";
@@ -17,35 +16,16 @@ const Register = () => {
     },validationSchema: Yup.object({
       username: Yup.string().required("Usuario requerido"),
       password: Yup.string().required("Contraseña requerida"),
-      email: Yup.string().email().required("Email requerido")
+      email: Yup.string().email("email invalido").required("Email requerido")
     }),
     onSubmit: (formData) => {
-      console.log(formData);
       register(formData.username, formData.password, formData.email, navigate);
     },
   });
-  const handleInputChange = (e) => {
-    // Obtén el nombre del campo y el nuevo valor
-    const { name, value } = e.target;
 
-    // Actualiza el estado correspondiente con una cadena vacía
-    if (name === "usermane") {
-      setUsernameErrorForm("");
-    } else if (name === "password") {
-      setPasswordErrorForm("");
-    }else if(name === "email"){
-      setEmailErrorForm("");
-    }
-
-    // Actualiza los valores de formik
-    formik.setFieldValue(name, value);
-  };
   const navigate = useNavigate();
-  const [usernameErrorForm, setUsernameErrorForm] = useState("");
-  const [passwordErrorForm, setPasswordErrorForm] = useState("");
-  const [emailErrorForm, setEmailErrorForm] = useState("");
   return (
-    <div className="home-container">
+    <div className="home-container" onSubmit={formik.handleSubmit}>
       <section className="title-register-s">
         <h1>Rellena los datos:</h1>
       </section>
@@ -53,24 +33,24 @@ const Register = () => {
         <Input
           placeholder="Nombre..."
           labelContent="Username: "
-          onChange={handleInputChange}
+          onChange={formik.handleChange}
           name="username"
-          error={formik.errors.username ?? usernameErrorForm}
+          error={formik.errors.username}
         />
         <Input
           placeholder="Contraseña..."
           labelContent="Contraseña: "
           typeText="password"
-          onChange={handleInputChange}
+          onChange={formik.handleChange}
           name="password"
-          error={formik.errors.password ?? passwordErrorForm}
+          error={formik.errors.password}
         />
         <Input
           placeholder="Email.."
           labelContent="Email: "
-          onChange={handleInputChange}
+          onChange={formik.handleChange}
           name="email"
-          error={formik.errors.email ?? emailErrorForm}
+          error={formik.errors.email}
         />
         <Button
           contentButton="Registrarse"

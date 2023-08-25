@@ -3,7 +3,7 @@ const { loginRepository } = require('../utils/connection');
 const getUsersService = async () => {
     const result = await loginRepository.find();
 
-    return result.rows;
+    return result;
 }
 
 const insertUsersService = async (username, password, email, creationDate) => {
